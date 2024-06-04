@@ -1,0 +1,29 @@
+name: musicapp
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/Images/s1.jpg
+    - lib/Images/s2.jpg
+    - lib/Images/s2_1.jpg
+    - lib/Images/s2_2.jpg
+    - lib/Images/s2_3.jpg
+    - lib/Images/s2_4.jpg
+    - lib/Images/s2_5.jpg
+    - lib/Images/radix-icons_share-2.png
