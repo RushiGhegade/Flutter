@@ -1,0 +1,42 @@
+name: bicycle
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+  provider: ^6.1.2
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/images/EXTREME.png
+    - lib/images/s1_2.png
+    - lib/images/s1.png
+    - lib/images/Rectangle 1.png
+    - lib/images/pngwing.png
+    - lib/images/image 1.png
+    - lib/images/image 2.png
+    - lib/images/image 3.png
+    - lib/images/image 4.png
+    - lib/images/pngwing (1).png
+    - lib/images/pngwing (2).png
+    - lib/images/pngwing (2).png
+    - lib/images/pngwing (3).png
+    - lib/images/pngwing (4).png
+    - lib/images/p2.png
+    - lib/images/p3.png
+    - lib/images/p4.png
+    - lib/images/m1.png
+    - lib/images/m2.png
+    - lib/images/m3.png

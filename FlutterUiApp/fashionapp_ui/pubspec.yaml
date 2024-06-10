@@ -1,0 +1,34 @@
+name: fashionapp_ui
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  flutter_slidable: ^3.1.0
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/Images/s1.jpg
+    - lib/Images/s1.jpg
+    - lib/Images/s2_1.png
+    - lib/Images/s2_2.png
+    - lib/Images/s2.png
+    - lib/Images/s2_3.png
+    - lib/Images/Menu.png
+    - lib/Images/Profile.png
+    - lib/Images/h1.png
+    - lib/Images/Options.png
+    - lib/Images/Payment.png
+    - lib/Images/Address.png

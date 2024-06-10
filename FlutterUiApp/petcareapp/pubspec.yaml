@@ -1,0 +1,59 @@
+name: petcareapp
+description: "A new Flutter project."
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.3.4 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.2.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^3.0.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/images/Group 12.png
+    - lib/images/Brandmark Logo.png
+    - lib/images/s3.jpg
+    - lib/images/s3_1.jpg
+    - lib/images/image.png
+    - lib/images/s3_2.png
+    - lib/images/s3_3.png
+    - lib/images/s3_4.png
+    - lib/images/s3_5.png
+    - lib/images/s3_6.png
+    - lib/images/s3_7.png
+    - lib/images/s4.jpg
+    - lib/images/s4_1.jpg
+    - lib/images/s4_2.jpg
+    - lib/images/s4_3.jpg
+    - lib/images/s4_4.jpg
+    - lib/images/s4_5.jpg
+    - lib/images/s4_6.jpg
+    - lib/images/Frame 2117.png
+    - lib/images/Pet Shop (1).png
+    - lib/images/Pet Shop (2).png
+    - lib/images/Pet Shop (3).png
+    - lib/images/Pet Shop.png
+    - lib/images/Frame 2117 (1).png
+    - lib/images/Pet Shop (4).png
+    - lib/images/Pet Shop (5).png
+    - lib/images/p1 (2).png
+    - lib/images/5_1.jpg
+    - lib/images/image (1).png
+    - lib/images/image (2).png
+    - lib/images/image (3).png
+    - lib/images/image (4).png
+    - lib/images/image (5).png
+    - lib/images/image (6).png
+    - lib/images/Frame 2061.png
+    - lib/images/Frame 2061 (3).png
+    - lib/images/Frame 2061 (2).png
+    - lib/images/Frame 2061 (1).png
