@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_app/view/main.dart';
 import 'package:home_app/view/screen2.dart';
-// import '';
+import 'package:provider/provider.dart';
 
 class Screen3 extends StatefulWidget {
   const Screen3({super.key});
@@ -18,19 +19,19 @@ class _Screen3State extends State<Screen3> {
         color: Color.fromRGBO(90, 90, 90, 1),
       ),
       "name": "Bedrooms",
-      "quantity": 5,
+      "quantity": "5",
     },
     {
       "icon": const Icon(Icons.bathtub_rounded,
           color: Color.fromRGBO(90, 90, 90, 1)),
       "name": "Bathrooms",
-      "quantity": "6"
+      "quantity": "5"
     },
     {
       "icon": const Icon(Icons.square_outlined,
           color: Color.fromRGBO(90, 90, 90, 1)),
       "name": "Square ft",
-      "quantity": "7,000 sq ft"
+      "quantity": "6,000 sq ft"
     }
   ];
   @override
@@ -78,12 +79,13 @@ class _Screen3State extends State<Screen3> {
             height: 20,
           ),
           Container(
-            height: 244,
+            height: 280, //244
             width: 390,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(30),
-                image: const DecorationImage(
-                    image: AssetImage("lib/images/s2_1.jpg"),
+                image: DecorationImage(
+                    image: AssetImage(Provider.of<HomeInfo>(context)
+                        .homeInfo()[indexs]['image']),
                     fit: BoxFit.cover)),
           ),
           const SizedBox(
@@ -98,7 +100,7 @@ class _Screen3State extends State<Screen3> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    "Night Hill Villa",
+                    Provider.of<HomeInfo>(context).homeInfo()[indexs]['name'],
                     style: GoogleFonts.poppins(
                       fontSize: 22,
                       fontWeight: FontWeight.w600,
@@ -106,7 +108,8 @@ class _Screen3State extends State<Screen3> {
                     ),
                   ),
                   Text(
-                    "Night Hill Villa",
+                    Provider.of<HomeInfo>(context).homeInfo()[indexs]
+                        ['location'],
                     style: GoogleFonts.poppins(
                       fontSize: 15,
                       fontWeight: FontWeight.w500,
@@ -117,10 +120,10 @@ class _Screen3State extends State<Screen3> {
               ),
               const Spacer(),
               Text(
-                "\$5900",
+                "\$${Provider.of<HomeInfo>(context).homeInfo()[indexs]['price'].substring(0, 5)}",
                 style: GoogleFonts.poppins(
-                  fontSize: 16,
-                  fontWeight: FontWeight.w500,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
                   color: const Color.fromRGBO(32, 169, 247, 1),
                 ),
               ),

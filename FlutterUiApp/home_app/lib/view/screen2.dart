@@ -2,7 +2,9 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:home_app/view/main.dart';
 import 'package:home_app/view/screen3.dart';
+import 'package:provider/provider.dart';
 
 class Screen2 extends StatefulWidget {
   const Screen2({super.key});
@@ -49,6 +51,7 @@ List<Map<String, dynamic>> infoRoom = [
     "price": "4500 /Month"
   },
 ];
+int indexs = 0;
 
 class _Screen2State extends State<Screen2> {
   @override
@@ -178,7 +181,7 @@ class _Screen2State extends State<Screen2> {
                         return GestureDetector(
                           onTap: () {
                             log("$index");
-
+                            indexs = index;
                             Navigator.of(context).push(
                               MaterialPageRoute(
                                 builder: (context) {
@@ -209,7 +212,8 @@ class _Screen2State extends State<Screen2> {
                                       borderRadius: BorderRadius.circular(10),
                                       image: DecorationImage(
                                           image: AssetImage(
-                                            data[index]['image'],
+                                            Provider.of<HomeInfo>(context)
+                                                .homeInfo()[index]['image'],
                                           ),
                                           fit: BoxFit.cover)),
                                 ),
@@ -217,7 +221,8 @@ class _Screen2State extends State<Screen2> {
                                   height: 10,
                                 ),
                                 Text(
-                                  data[index]['name'],
+                                  Provider.of<HomeInfo>(context)
+                                      .homeInfo()[index]['name'],
                                   style: GoogleFonts.poppins(
                                     fontSize: 17,
                                     fontWeight: FontWeight.w700,
@@ -228,7 +233,8 @@ class _Screen2State extends State<Screen2> {
                                   height: 2,
                                 ),
                                 Text(
-                                  data[index]['name'],
+                                  Provider.of<HomeInfo>(context)
+                                      .homeInfo()[index]['location'],
                                   style: GoogleFonts.poppins(
                                     fontSize: 13,
                                     fontWeight: FontWeight.w600,
@@ -241,7 +247,7 @@ class _Screen2State extends State<Screen2> {
                                 Row(
                                   children: [
                                     Text(
-                                      "\$${data[index]['price'].substring(0, 5)}",
+                                      "\$${Provider.of<HomeInfo>(context).homeInfo()[index]['price'].substring(0, 5)}",
                                       style: GoogleFonts.poppins(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
@@ -250,7 +256,7 @@ class _Screen2State extends State<Screen2> {
                                       ),
                                     ),
                                     Text(
-                                      "${data[index]['price'].substring(5, 11)}",
+                                      "${Provider.of<HomeInfo>(context).homeInfo()[index]['price'].substring(5, 11)}",
                                       style: GoogleFonts.poppins(
                                         fontSize: 14,
                                         fontWeight: FontWeight.w600,
