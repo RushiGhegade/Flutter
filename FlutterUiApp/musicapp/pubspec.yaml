@@ -7,6 +7,8 @@ environment:
   sdk: ">=3.3.4 <4.0.0"
 
 dependencies:
+  audioplayers: ^6.0.0
+  carousel_slider: ^4.2.1
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
@@ -21,10 +23,31 @@ flutter:
   uses-material-design: true
   assets:
     - lib/Images/s1.jpg
+    - lib/Images/k1.jpg
+    - lib/Images/k2.jpg
+    - lib/Images/k3.jpg
+    - lib/Images/k4.jpg
+    - lib/Images/k5.jpg
     - lib/Images/s2.jpg
     - lib/Images/s2_1.jpg
+    - lib/Images/pk1.png
     - lib/Images/s2_2.jpg
+    - lib/Images/pk2.png
+    - lib/Images/pk4.png
+    - lib/Images/pl1.png
+    - lib/Images/pk5.png
     - lib/Images/s2_3.jpg
     - lib/Images/s2_4.jpg
     - lib/Images/s2_5.jpg
     - lib/Images/radix-icons_share-2.png
+    - assets/Audio/children-electro-swing-2_v2_60sec-178292.mp3
+    - assets/Audio/corporate-climb-200939.mp3
+    - assets/Audio/dance-mood-132148.mp3
+    - assets/Audio/happy-114950.mp3
+    - assets/Audio/happy-210888.mp3
+    - assets/Audio/joyride-jamboree-206911.mp3
+    - assets/Audio/lotus-sky-dreams-216049.mp3
+    - assets/Audio/reflected-light-147979.mp3
+    - assets/Audio/upbeat-acoustic-113986.mp3
+    - assets/Audio/whistle-joyride-193123.mp3
+    - assets/Audio/xmas-background-short-music-for-video-vlog-deck-the-halls-42-second-181855.mp3

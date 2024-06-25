@@ -1,5 +1,9 @@
+import 'dart:developer';
+
+import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:musicapp/view/Screen4.dart';
 import 'package:musicapp/view/bottomClass.dart';
 import 'package:musicapp/view/main.dart';
 import 'package:provider/provider.dart';
@@ -15,8 +19,64 @@ class Screen3 extends StatefulWidget {
 
 // lib/Images/s2_2.jpg
 class _Screen3State extends State<Screen3> {
+  Duration duration = Duration.zero;
+  Duration position = Duration.zero;
+
+  @override
+  void initState() {
+    _audioPlayer.onPlayerStateChanged.listen((event) {
+      setState(() {});
+    });
+
+    _audioPlayer.onDurationChanged.listen((newDuration) {
+      setState(() {
+        duration = newDuration;
+      });
+    });
+
+    _audioPlayer.onPositionChanged.listen((newPosition) {
+      setState(() {
+        position = newPosition;
+      });
+    });
+
+    super.initState();
+  }
+
+  String formatString(int second1) {
+    return '${Duration(seconds: second1)}'.split('.')[0].padLeft(8, '0');
+  }
+
   bool flag1 = false;
   bool flag2 = false;
+
+  final _audioPlayer = AudioPlayer();
+
+  Future<void> playSong(String path) async {
+    flag1 = true;
+    log(path);
+    await _audioPlayer.play(AssetSource(path));
+    setState(() {});
+  }
+
+  Future<void> pauseSong() async {
+    flag1 = false;
+
+    await _audioPlayer.pause();
+    setState(() {});
+  }
+
+  Future<void> songVal(double val) async {
+    await _audioPlayer.setVolume(val);
+    setState(() {});
+  }
+
+  @override
+  void dispose() {
+    _audioPlayer.stop();
+    _audioPlayer.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -57,7 +117,16 @@ class _Screen3State extends State<Screen3> {
                   Row(
                     children: [
                       const Spacer(),
-                      Image.asset("lib/Images/radix-icons_share-2.png"),
+                      GestureDetector(
+                          onTap: () {
+                            Navigator.push(context, MaterialPageRoute(
+                              builder: (context) {
+                                return const Screen4();
+                              },
+                            ));
+                          },
+                          child: Image.asset(
+                              "lib/Images/radix-icons_share-2.png")),
                       const SizedBox(
                         width: 10,
                       ),
@@ -108,14 +177,50 @@ class _Screen3State extends State<Screen3> {
                 const SizedBox(
                   height: 10,
                 ),
-                const SizedBox(
+                SizedBox(
                   height: 6,
-                  width: 390,
-                  child: LinearProgressIndicator(
-                    borderRadius: BorderRadius.all(Radius.circular(10)),
-                    value: 0.3,
-                    valueColor:
-                        AlwaysStoppedAnimation(Color.fromRGBO(230, 154, 21, 1)),
+                  width: 430,
+                  child: Slider(
+                      min: 0,
+                      max: duration.inSeconds.toDouble(),
+                      value: position.inSeconds.toDouble(),
+                      onChanged: (value) {
+                        log("${value.toInt()}");
+                        final position = Duration(seconds: value.toInt());
+                        _audioPlayer.seek(position);
+                        _audioPlayer.resume();
+                        setState(() {});
+                      }),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                SizedBox(
+                  child: Row(
+                    // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const SizedBox(
+                        width: 10,
+                      ),
+                      Text(
+                        formatString(duration.inSeconds),
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromRGBO(255, 255, 255, 1)),
+                      ),
+                      const Spacer(),
+                      Text(
+                        formatString((duration - position).inSeconds),
+                        style: GoogleFonts.inter(
+                            fontSize: 14,
+                            fontWeight: FontWeight.w400,
+                            color: const Color.fromRGBO(255, 255, 255, 1)),
+                      ),
+                      const SizedBox(
+                        width: 10,
+                      ),
+                    ],
                   ),
                 ),
                 const SizedBox(
@@ -124,14 +229,20 @@ class _Screen3State extends State<Screen3> {
                 Row(
                   children: [
                     const Spacer(),
-                    const Icon(
-                      Icons.loop_rounded,
-                      size: 25,
-                      color: Color.fromRGBO(255, 255, 255, 1),
+                    GestureDetector(
+                      onTap: () async {
+                        await _audioPlayer.seek(Duration.zero);
+                        setState(() {});
+                      },
+                      child: const Icon(
+                        Icons.loop_rounded,
+                        size: 25,
+                        color: Color.fromRGBO(255, 255, 255, 1),
+                      ),
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (indexs == 0) {
                           indexs = Provider.of<Playlist>(context, listen: false)
                                   .getdata()
@@ -140,6 +251,12 @@ class _Screen3State extends State<Screen3> {
                         } else {
                           indexs--;
                         }
+                        await pauseSong();
+                        String Path =
+                            Provider.of<Playlist>(context, listen: false)
+                                .getdata()[indexs]['Music'];
+                        await Future<void>.delayed(Duration(seconds: 1));
+                        await playSong(Path);
                         setState(() {});
                       },
                       child: const Icon(
@@ -149,22 +266,30 @@ class _Screen3State extends State<Screen3> {
                       ),
                     ),
                     const Spacer(),
-                    GestureDetector(
-                      onTap: () {
-                        flag1 = !flag1;
+                    IconButton(
+                      onPressed: () async {
+                        if (!flag1) {
+                          String path =
+                              Provider.of<Playlist>(context, listen: false)
+                                  .getdata()[indexs]['Music'];
+                          await playSong(path);
+                        } else {
+                          flag1 = false;
+                          await pauseSong();
+                        }
+
                         setState(() {});
                       },
-                      child: Icon(
-                        (!flag1)
-                            ? Icons.play_circle_fill_outlined
-                            : Icons.pause_circle_filled_outlined,
-                        size: 75,
-                        color: const Color.fromRGBO(255, 255, 255, 1),
-                      ),
+                      icon: (!flag1)
+                          ? const Icon(Icons.play_circle_fill_outlined,
+                              size: 75, color: Color.fromRGBO(255, 255, 255, 1))
+                          : const Icon(Icons.pause_circle_filled_outlined,
+                              size: 75,
+                              color: Color.fromRGBO(255, 255, 255, 1)),
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         if (indexs <
                             Provider.of<Playlist>(context, listen: false)
                                     .getdata()
@@ -174,6 +299,12 @@ class _Screen3State extends State<Screen3> {
                         } else {
                           indexs = 0;
                         }
+                        await pauseSong();
+                        String Path =
+                            Provider.of<Playlist>(context, listen: false)
+                                .getdata()[indexs]['Music'];
+                        await Future<void>.delayed(Duration(seconds: 1));
+                        await playSong(Path);
                         setState(() {});
                       },
                       child: const Icon(
@@ -184,8 +315,13 @@ class _Screen3State extends State<Screen3> {
                     ),
                     const Spacer(),
                     GestureDetector(
-                      onTap: () {
+                      onTap: () async {
                         flag2 = !flag2;
+                        if (!flag2) {
+                          await songVal(1);
+                        } else {
+                          await songVal(0);
+                        }
                         setState(() {});
                       },
                       child: Icon(

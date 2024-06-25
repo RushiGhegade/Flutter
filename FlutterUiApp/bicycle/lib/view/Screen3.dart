@@ -101,6 +101,8 @@ class _Screen3State extends State<Screen3> {
                         fit: BoxFit.cover,
                       ),
                     ),
+
+                    
                     Row(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [

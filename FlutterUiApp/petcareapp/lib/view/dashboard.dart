@@ -93,7 +93,7 @@ class _DashboardState extends State<Dashboard> {
                         style: GoogleFonts.poppins(
                             fontSize: 16,
                             fontWeight: FontWeight.w400,
-                            color: Color.fromARGB(255, 127, 127, 130)),
+                            color: const Color.fromARGB(255, 127, 127, 130)),
                       ),
                     ],
                   ),
@@ -131,10 +131,19 @@ class _DashboardState extends State<Dashboard> {
                     labelText: "search",
                     labelStyle: const TextStyle(fontSize: 17),
                     enabledBorder: OutlineInputBorder(
-                        borderRadius: BorderRadius.circular(8),
-                        borderSide: const BorderSide(
-                            width: 2,
-                            color: Color.fromRGBO(245, 146, 69, 0.8))),
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color.fromRGBO(245, 146, 69, 0.8),
+                      ),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(8),
+                      borderSide: const BorderSide(
+                        width: 2,
+                        color: Color.fromRGBO(245, 146, 69, 0.8),
+                      ),
+                    ),
                   ),
                 ),
               ),

@@ -1,6 +1,8 @@
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:musicapp/view/Screen3.dart';
+import 'package:musicapp/view/Screen4.dart';
 import 'package:musicapp/view/bottomClass.dart';
 import 'package:musicapp/view/main.dart';
 import 'package:provider/provider.dart';
@@ -48,66 +50,143 @@ class _Screen1State extends State<Screen2> {
     // {"image": "lib/Images/s2_3.jpg", "Name": "Heartless ", "Year": "2023"},
   ];
 
+  List<String> images = [
+    // "lib/Images/k5.jpg",
+    "lib/Images/s2.jpg",
+    "lib/Images/pk5.png",
+    "lib/Images/pl1.png"
+  ];
+
+  int index = 0;
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
           children: [
-            Container(
-                width: 459,
-                height: 367,
-                decoration: const BoxDecoration(
-                    image: DecorationImage(
-                        image: AssetImage("lib/Images/s2.jpg"),
-                        fit: BoxFit.cover)),
-                child: Center(
-                  child: Row(
-                    children: [
-                      const SizedBox(
-                        width: 20,
-                      ),
-                      Column(
-                        // mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const Spacer(
-                            flex: 3,
-                          ),
-                          Text(
-                            "A.L.O.N.E",
-                            style: GoogleFonts.inter(
-                                fontSize: 36,
-                                fontWeight: FontWeight.w600,
-                                color: const Color.fromRGBO(255, 255, 255, 1)),
-                          ),
-                          const SizedBox(
-                            height: 20,
-                          ),
-                          Container(
-                            height: 37,
-                            width: 127,
-                            alignment: Alignment.center,
-                            decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(19),
-                              color: const Color.fromRGBO(255, 46, 0, 1),
-                            ),
-                            child: Text(
-                              "Subscribe",
-                              style: GoogleFonts.inter(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w600,
-                                  color: const Color.fromRGBO(19, 19, 19, 1)),
-                            ),
-                          ),
-                          const Spacer(
-                            flex: 1,
-                          ),
-                        ],
-                      ),
-                    ],
+            Stack(
+              // fit: StackFit.loose,
+              // clipBehavior: Clip.antiAlias,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(top: 0),
+                  child: CarouselSlider(
+                    items: images
+                        .map((image) => Container(
+                              width: 459,
+                              height: 407,
+                              decoration: BoxDecoration(
+                                  image: DecorationImage(
+                                image: AssetImage(image),
+                                fit: BoxFit.cover,
+                              )),
+                            ))
+                        .toList(),
+                    options: CarouselOptions(
+                      onPageChanged: (index1, reason) {
+                        index = index1;
+                        // log("$index");
+                        setState(() {});
+                      },
+                      viewportFraction: 1,
+                      height: 407,
+                      enlargeFactor: 0.3,
+                      autoPlay: true,
+                    ),
                   ),
-                )),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 260, left: 20),
+                  child: Container(
+                    child: Column(
+                      children: [
+                        Text(
+                          "A.L.O.N.E",
+                          style: GoogleFonts.inter(
+                              fontSize: 36,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromRGBO(255, 255, 255, 1)),
+                        ),
+                        const SizedBox(
+                          height: 20,
+                        ),
+                        Container(
+                          height: 37,
+                          width: 127,
+                          alignment: Alignment.center,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(19),
+                            color: const Color.fromRGBO(255, 46, 0, 1),
+                          ),
+                          child: Text(
+                            "Subscribe",
+                            style: GoogleFonts.inter(
+                                fontSize: 16,
+                                fontWeight: FontWeight.w600,
+                                color: const Color.fromRGBO(19, 19, 19, 1)),
+                          ),
+                        ),
+                      ],
+                    ),
+                  ),
+                )
+              ],
+            ),
+            // Container(
+            //     width: 459,
+            //     height: 367,
+            //     decoration: const BoxDecoration(
+            //         image: DecorationImage(
+            //             image: AssetImage("lib/Images/s2.jpg"),
+            //             fit: BoxFit.cover)),
+            //     child: Center(
+            //       child: Row(
+            //         children: [
+            //           const SizedBox(
+            //             width: 20,
+            //           ),
+            // Column(
+            //   // mainAxisAlignment: MainAxisAlignment.center,
+            //   crossAxisAlignment: CrossAxisAlignment.start,
+            //   children: [
+            //     const Spacer(
+            //       flex: 3,
+            //     ),
+            //     Text(
+            //       "A.L.O.N.E",
+            //       style: GoogleFonts.inter(
+            //           fontSize: 36,
+            //           fontWeight: FontWeight.w600,
+            //           color: const Color.fromRGBO(255, 255, 255, 1)),
+            //     ),
+            // const SizedBox(
+            //   height: 20,
+            // ),
+            // Container(
+            //   height: 37,
+            //   width: 127,
+            //   alignment: Alignment.center,
+            //   decoration: BoxDecoration(
+            //     borderRadius: BorderRadius.circular(19),
+            //     color: const Color.fromRGBO(255, 46, 0, 1),
+            //   ),
+            //   child: Text(
+            //     "Subscribe",
+            //     style: GoogleFonts.inter(
+            //         fontSize: 16,
+            //         fontWeight: FontWeight.w600,
+            //         color: const Color.fromRGBO(19, 19, 19, 1)),
+            //   ),
+            // ),
+            //     const Spacer(
+            //       flex: 1,
+            //     ),
+            //   ],
+            // ),
+            //   ],
+            // ),
+            //     )),
             Container(
               height: 442.4,
               width: 586,
@@ -118,41 +197,68 @@ class _Screen1State extends State<Screen2> {
                   const SizedBox(
                     height: 15,
                   ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        height: 7,
-                        width: 21,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            shape: BoxShape.rectangle,
-                            color: Color.fromRGBO(255, 61, 0, 1)),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Container(
-                        height: 7,
-                        width: 7,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            shape: BoxShape.rectangle,
-                            color: Color.fromRGBO(159, 159, 159, 1)),
-                      ),
-                      const SizedBox(
-                        width: 6,
-                      ),
-                      Container(
-                        height: 7,
-                        width: 7,
-                        decoration: const BoxDecoration(
-                            borderRadius: BorderRadius.all(Radius.circular(15)),
-                            shape: BoxShape.rectangle,
-                            color: Color.fromRGBO(159, 159, 159, 1)),
-                      )
-                    ],
+                  SizedBox(
+                    height: 10,
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: [
+                        ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.horizontal,
+                          itemCount: images.length,
+                          itemBuilder: (context, index1) {
+                            return Container(
+                              margin: const EdgeInsets.only(right: 4),
+                              height: 10,
+                              width: (index == index1) ? 17 : 10,
+                              decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.all(
+                                      Radius.circular(15)),
+                                  shape: BoxShape.rectangle,
+                                  color: (index == index1)
+                                      ? const Color.fromRGBO(255, 61, 0, 1)
+                                      : const Color.fromRGBO(159, 159, 159, 1)),
+                            );
+                          },
+                        ),
+                      ],
+                    ),
                   ),
+                  // Row(
+                  //   mainAxisAlignment: MainAxisAlignment.center,
+                  //   children: [
+                  //     Container(
+                  //       height: 7,
+                  //       width: 21,
+                  //       decoration: const BoxDecoration(
+                  //           borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //           shape: BoxShape.rectangle,
+                  //           color: Color.fromRGBO(255, 61, 0, 1)),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 6,
+                  //     ),
+                  //     Container(
+                  //       height: 7,
+                  //       width: 7,
+                  //       decoration: const BoxDecoration(
+                  //           borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //           shape: BoxShape.rectangle,
+                  //           color: Color.fromRGBO(159, 159, 159, 1)),
+                  //     ),
+                  //     const SizedBox(
+                  //       width: 6,
+                  //     ),
+                  //     Container(
+                  //       height: 7,
+                  //       width: 7,
+                  //       decoration: const BoxDecoration(
+                  //           borderRadius: BorderRadius.all(Radius.circular(15)),
+                  //           shape: BoxShape.rectangle,
+                  //           color: Color.fromRGBO(159, 159, 159, 1)),
+                  //     )
+                  //   ],
+                  // ),
                   const SizedBox(
                     height: 15,
                   ),
@@ -169,12 +275,21 @@ class _Screen1State extends State<Screen2> {
                             color: const Color.fromRGBO(255, 46, 0, 1)),
                       ),
                       const Spacer(),
-                      Text(
-                        "See all",
-                        style: GoogleFonts.inter(
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                            color: const Color.fromRGBO(248, 162, 69, 1)),
+                      GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const Screen4();
+                            },
+                          ));
+                        },
+                        child: Text(
+                          "See all",
+                          style: GoogleFonts.inter(
+                              fontSize: 16,
+                              fontWeight: FontWeight.w600,
+                              color: const Color.fromRGBO(248, 162, 69, 1)),
+                        ),
                       ),
                       const SizedBox(
                         width: 10,

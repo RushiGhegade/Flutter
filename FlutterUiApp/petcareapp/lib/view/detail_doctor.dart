@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:petcareapp/view/Veterinary.dart';
+import 'package:petcareapp/view/main.dart';
+import 'package:provider/provider.dart';
 
 class DetailDoctor extends StatefulWidget {
   const DetailDoctor({super.key});
@@ -10,18 +12,18 @@ class DetailDoctor extends StatefulWidget {
 }
 
 class _DetailDoctorState extends State<DetailDoctor> {
-  List<Map<String, dynamic>> DInfo = [
+  List<Map<String, String>> DInfo = [
     {
       "name": "Experience",
-      "info": "11 Year",
+      "info": "Experiance",
     },
     {
       "name": "price",
-      "info": "\$250",
+      "info": "price",
     },
     {
       "name": "Location",
-      "info": "2.5 km",
+      "info": "Location",
     }
   ];
 
@@ -91,9 +93,16 @@ class _DetailDoctorState extends State<DetailDoctor> {
             width: 380,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
-              image: const DecorationImage(
-                  image: AssetImage("lib/images/p1 (2).png"),
-                  fit: BoxFit.cover),
+              image: DecorationImage(
+                // image: AssetImage("lib/images/p1 (2).png"),
+                image: AssetImage(
+                    Provider.of<DoctorInfo>(context, listen: false).info()[
+                        Provider.of<DoctorInfo>(context, listen: false)
+                            .index]['Image']),
+                fit: BoxFit.cover,
+                alignment: const Alignment(0, -0.7),
+                scale: 2.4,
+              ),
             ),
           ),
           const SizedBox(
@@ -113,14 +122,18 @@ class _DetailDoctorState extends State<DetailDoctor> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text(
-                      "Dr. Anna Jhonason",
+                      Provider.of<DoctorInfo>(context, listen: false).info()[
+                          Provider.of<DoctorInfo>(context, listen: false)
+                              .index]['Name'],
                       style: GoogleFonts.poppins(
                           fontSize: 24,
                           fontWeight: FontWeight.w500,
                           color: const Color.fromRGBO(0, 0, 0, 1)),
                     ),
                     Text(
-                      "Veterinary Behavioral",
+                      Provider.of<DoctorInfo>(context, listen: false).info()[
+                          Provider.of<DoctorInfo>(context, listen: false)
+                              .index]['degree'],
                       style: GoogleFonts.poppins(
                           fontSize: 12,
                           fontWeight: FontWeight.w400,
@@ -156,7 +169,8 @@ class _DetailDoctorState extends State<DetailDoctor> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 Text(
-                                  DInfo[index]["name"],
+                                  // DInfo[index]["name"],
+                                  "Name",
                                   style: GoogleFonts.poppins(
                                       fontSize: 15,
                                       fontWeight: FontWeight.w500,
@@ -166,7 +180,11 @@ class _DetailDoctorState extends State<DetailDoctor> {
                                   height: 10,
                                 ),
                                 Text(
-                                  DInfo[index]["info"],
+                                  Provider.of<DoctorInfo>(context,
+                                          listen: false)
+                                      .info()[Provider.of<DoctorInfo>(context,
+                                          listen: false)
+                                      .index]["${DInfo[index]['info']}"],
                                   style: GoogleFonts.poppins(
                                       fontSize: 16,
                                       fontWeight: FontWeight.w700,
