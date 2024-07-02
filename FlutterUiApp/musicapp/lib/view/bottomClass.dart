@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:musicapp/view/Screen1.dart';
 import 'package:musicapp/view/Screen2.dart';
-import 'package:musicapp/view/Screen3.dart';
+import 'package:musicapp/view/favoriteMusic.dart';
+import 'package:musicapp/view/my_playlist.dart';
+import 'package:musicapp/view/searchScreen.dart';
 
 class BottomClass extends StatefulWidget {
   const BottomClass({super.key});
@@ -28,7 +29,7 @@ class _BottomClassState extends State<BottomClass> {
                 index = 0;
                 Navigator.of(context).push(MaterialPageRoute(
                   builder: (context) {
-                    return const Screen3();
+                    return const FavoriteSong();
                   },
                 ));
               },
@@ -37,9 +38,19 @@ class _BottomClassState extends State<BottomClass> {
               ),
             ),
             label: "Favorite"),
-        const BottomNavigationBarItem(
-          icon: Icon(
-            Icons.search,
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              index = 1;
+              Navigator.of(context).push(MaterialPageRoute(
+                builder: (context) {
+                  return const SearchScreen();
+                },
+              ));
+            },
+            child: const Icon(
+              Icons.search,
+            ),
           ),
           label: "Search",
         ),
@@ -49,7 +60,7 @@ class _BottomClassState extends State<BottomClass> {
               index = 2;
               Navigator.of(context).push(MaterialPageRoute(
                 builder: (context) {
-                  return const Screen1();
+                  return const Screen2();
                 },
               ));
             },
@@ -59,9 +70,19 @@ class _BottomClassState extends State<BottomClass> {
           ),
           label: "Home",
         ),
-        const BottomNavigationBarItem(
-          icon: Icon(
-            Icons.shopping_bag_sharp,
+        BottomNavigationBarItem(
+          icon: GestureDetector(
+            onTap: () {
+              index = 3;
+              Navigator.push(context, MaterialPageRoute(
+                builder: (context) {
+                  return const MyPlaylist();
+                },
+              ));
+            },
+            child: const Icon(
+              Icons.shopping_bag_sharp,
+            ),
           ),
           label: "cart",
         ),

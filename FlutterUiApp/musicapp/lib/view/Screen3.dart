@@ -73,8 +73,10 @@ class _Screen3State extends State<Screen3> {
 
   @override
   void dispose() {
-    _audioPlayer.stop();
+    log("go it");
+    // _audioPlayer.stop();
     _audioPlayer.dispose();
+    setState(() {});
     super.dispose();
   }
 
@@ -90,53 +92,121 @@ class _Screen3State extends State<Screen3> {
               image: DecorationImage(
                   image: AssetImage(
                       Provider.of<Playlist>(context, listen: false)
-                          .getdata()[indexs]['image']),
+                          .getdata[indexs]['image']),
                   fit: BoxFit.fill),
             ),
-            child: Center(
-              child: Column(
-                children: [
-                  const Spacer(),
-                  Text(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 25,
+                ),
+                GestureDetector(
+                  onTap: () {
+                    // Navigator.push(context, MaterialPageRoute(
+                    //   builder: (context) {
+                    //     return const Screen2();
+                    //   },
+                    // ));
+                    Navigator.pop(context);
+                  },
+                  child: const Row(
+                    children: [
+                      SizedBox(
+                        width: 20,
+                      ),
+                      Icon(
+                        Icons.arrow_back_ios,
+                        size: 25,
+                        color: Color.fromRGBO(230, 154, 21, 1),
+                      ),
+                      Text(
+                        "Back",
+                        style: TextStyle(
+                          fontSize: 24,
+                          fontWeight: FontWeight.w700,
+                          color: Color.fromRGBO(230, 154, 21, 1),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                const Spacer(),
+                Center(
+                  child: Text(
                     "Alone in the Abyss",
                     style: GoogleFonts.inter(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
                         color: const Color.fromRGBO(230, 154, 21, 1)),
                   ),
-                  Text(
+                ),
+                Center(
+                  child: Text(
                     "Youlakou",
                     style: GoogleFonts.inter(
                         fontSize: 13,
                         fontWeight: FontWeight.w600,
                         color: const Color.fromRGBO(255, 255, 255, 1)),
                   ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                  Row(
-                    children: [
-                      const Spacer(),
-                      GestureDetector(
-                          onTap: () {
-                            Navigator.push(context, MaterialPageRoute(
-                              builder: (context) {
-                                return const Screen4();
-                              },
-                            ));
-                          },
-                          child: Image.asset(
-                              "lib/Images/radix-icons_share-2.png")),
-                      const SizedBox(
-                        width: 10,
-                      ),
-                    ],
-                  ),
-                  const SizedBox(
-                    height: 10,
-                  ),
-                ],
-              ),
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+                Row(
+                  children: [
+                    const SizedBox(
+                      width: 10,
+                    ),
+                    (Provider.of<Playlist>(context, listen: false)
+                                .getdata[indexs]['islike'] ==
+                            true)
+                        ? GestureDetector(
+                            onTap: () {
+                              Provider.of<Playlist>(context, listen: false)
+                                  .getdata[indexs]['islike'] = false;
+                              setState(() {});
+                              log("${Provider.of<Playlist>(context, listen: false).getdata[indexs]['islike']}");
+                            },
+                            child: const Icon(
+                              Icons.favorite,
+                              size: 32,
+                              color: Color.fromRGBO(230, 154, 21, 1),
+                            ),
+                          )
+                        : GestureDetector(
+                            onTap: () async {
+                              Provider.of<Playlist>(context, listen: false)
+                                  .getdata[indexs]['islike'] = true;
+                              setState(() {});
+                              log("${Provider.of<Playlist>(context, listen: false).getdata[indexs]['islike']}");
+                            },
+                            child: const Icon(
+                              Icons.favorite_border,
+                              color: Colors.white,
+                              size: 32,
+                            ),
+                          ),
+                    const Spacer(),
+                    GestureDetector(
+                        onTap: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const Screen4();
+                            },
+                          ));
+                        },
+                        child:
+                            Image.asset("lib/Images/radix-icons_share-2.png")),
+                    const SizedBox(
+                      width: 10,
+                    ),
+                  ],
+                ),
+                const SizedBox(
+                  height: 10,
+                ),
+              ],
             ),
           ),
           Container(
@@ -184,6 +254,7 @@ class _Screen3State extends State<Screen3> {
                       min: 0,
                       max: duration.inSeconds.toDouble(),
                       value: position.inSeconds.toDouble(),
+                      activeColor: const Color.fromRGBO(230, 154, 21, 1),
                       onChanged: (value) {
                         log("${value.toInt()}");
                         final position = Duration(seconds: value.toInt());
@@ -245,7 +316,7 @@ class _Screen3State extends State<Screen3> {
                       onTap: () async {
                         if (indexs == 0) {
                           indexs = Provider.of<Playlist>(context, listen: false)
-                                  .getdata()
+                                  .getdata
                                   .length -
                               1;
                         } else {
@@ -254,7 +325,7 @@ class _Screen3State extends State<Screen3> {
                         await pauseSong();
                         String Path =
                             Provider.of<Playlist>(context, listen: false)
-                                .getdata()[indexs]['Music'];
+                                .getdata[indexs]['Music'];
                         await Future<void>.delayed(Duration(seconds: 1));
                         await playSong(Path);
                         setState(() {});
@@ -271,7 +342,7 @@ class _Screen3State extends State<Screen3> {
                         if (!flag1) {
                           String path =
                               Provider.of<Playlist>(context, listen: false)
-                                  .getdata()[indexs]['Music'];
+                                  .getdata[indexs]['Music'];
                           await playSong(path);
                         } else {
                           flag1 = false;
@@ -292,7 +363,7 @@ class _Screen3State extends State<Screen3> {
                       onTap: () async {
                         if (indexs <
                             Provider.of<Playlist>(context, listen: false)
-                                    .getdata()
+                                    .getdata
                                     .length -
                                 1) {
                           indexs++;
@@ -302,7 +373,7 @@ class _Screen3State extends State<Screen3> {
                         await pauseSong();
                         String Path =
                             Provider.of<Playlist>(context, listen: false)
-                                .getdata()[indexs]['Music'];
+                                .getdata[indexs]['Music'];
                         await Future<void>.delayed(Duration(seconds: 1));
                         await playSong(Path);
                         setState(() {});

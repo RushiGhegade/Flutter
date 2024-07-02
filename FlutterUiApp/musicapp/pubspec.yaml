@@ -40,6 +40,7 @@ flutter:
     - lib/Images/s2_4.jpg
     - lib/Images/s2_5.jpg
     - lib/Images/radix-icons_share-2.png
+    - assets/Audio/s1.mp3
     - assets/Audio/children-electro-swing-2_v2_60sec-178292.mp3
     - assets/Audio/corporate-climb-200939.mp3
     - assets/Audio/dance-mood-132148.mp3
