@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_app/view/main.dart';
 import 'package:home_app/view/screen3.dart';
+import 'package:page_transition/page_transition.dart';
 import 'package:provider/provider.dart';
 
 class Screen2 extends StatefulWidget {
@@ -13,44 +14,24 @@ class Screen2 extends StatefulWidget {
   State<Screen2> createState() => _Screen2State();
 }
 
-List<Map<String, dynamic>> data = [
-  {
-    "image": "lib/images/s2_1.jpg",
-    "name": "Night Hill Villa",
-    "location": "London,Night Hill",
-    "price": "5900 /Month",
-    "quantitybed": "5",
-    "quantitybath": "6",
-    "square": "7,000 sq ft"
-  },
-  {
-    "image": "lib/images/s2_2.jpg",
-    "name": "Night Villa",
-    "location": "London,New Park",
-    "price": "4900 /Month",
-    "quantitybed": "3",
-    "quantitybath": "4",
-    "square": "6,000 sq ft"
-  },
-];
-List<Map<String, dynamic>> infoRoom = [
-  {
-    "image": "lib\images\s2_3.jpg",
-    "name": "Jumeriah Golf Estates Villa",
-    "location": "London,Area Plam Jumeriah",
-    "bed": "4 Bedrooms",
-    "bath": "5 Bathrooms",
-    "price": "4500 /Month"
-  },
-  {
-    "image": "lib\images\s2_3.jpg",
-    "name": "Jumeriah Golf Estates Villa",
-    "location": "London,Area Plam Jumeriah",
-    "bed": "4 Bedrooms",
-    "bath": "5 Bathrooms",
-    "price": "4500 /Month"
-  },
-];
+// List<Map<String, dynamic>> infoRoom = [
+//   {
+//     "image": "lib\images\s2_3.jpg",
+//     "name": "Jumeriah Golf Estates Villa",
+//     "location": "London,Area Plam Jumeriah",
+//     "bed": "4 Bedrooms",
+//     "bath": "5 Bathrooms",
+//     "price": "4500 /Month"
+//   },
+//   {
+//     "image": "lib\images\s2_3.jpg",
+//     "name": "Jumeriah Golf Estates Villa",
+//     "location": "London,Area Plam Jumeriah",
+//     "bed": "4 Bedrooms",
+//     "bath": "5 Bathrooms",
+//     "price": "4500 /Month"
+//   },
+// ];
 int indexs = 0;
 
 class _Screen2State extends State<Screen2> {
@@ -176,19 +157,17 @@ class _Screen2State extends State<Screen2> {
                     child: ListView.builder(
                       scrollDirection: Axis.horizontal,
                       shrinkWrap: true,
-                      itemCount: data.length,
+                      itemCount:
+                          Provider.of<HomeInfo>(context).homeInfo().length,
                       itemBuilder: (context, index) {
                         return GestureDetector(
                           onTap: () {
                             log("$index");
+                            
                             indexs = index;
-                            Navigator.of(context).push(
-                              MaterialPageRoute(
-                                builder: (context) {
-                                  return const Screen3();
-                                },
-                              ),
-                            );
+                            Navigator.of(context).push(PageTransition(
+                                child: const Screen3(num: 0),
+                                type: PageTransitionType.leftToRight));
                           },
                           child: Container(
                             // height: 250,
@@ -305,129 +284,72 @@ class _Screen2State extends State<Screen2> {
               ListView.builder(
                 shrinkWrap: true,
                 scrollDirection: Axis.vertical,
-                itemCount: infoRoom.length,
+                itemCount: Provider.of<HomeInfo>(context).NearByLoc.length,
                 itemBuilder: (context, index) {
-                  return Container(
-                    margin: const EdgeInsets.only(bottom: 20, right: 8),
-                    height: 108,
-                    width: 346,
-                    decoration: BoxDecoration(
-                      color: const Color.fromRGBO(255, 255, 255, 1),
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    child: Row(
-                      children: [
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Container(
-                          height: 90,
-                          width: 90,
-                          decoration: BoxDecoration(
-                              borderRadius: BorderRadius.circular(20),
-                              image: const DecorationImage(
-                                  image: AssetImage("lib/images/s2_3.jpg"),
-                                  fit: BoxFit.cover)),
-                        ),
-                        const SizedBox(
-                          width: 10,
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            const SizedBox(
-                              height: 10,
-                            ),
-                            Text(
-                              infoRoom[index]['name'],
-                              style: GoogleFonts.poppins(
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: const Color.fromRGBO(0, 0, 0, 1),
+                  return GestureDetector(
+                    onTap: () {
+                      indexs = index;
+                      Navigator.of(context).push(PageTransition(
+                          child: const Screen3(num: 1),
+                          type: PageTransitionType.leftToRight));
+                    },
+                    child: Container(
+                      margin: const EdgeInsets.only(bottom: 20, right: 8),
+                      height: 108,
+                      width: 346,
+                      decoration: BoxDecoration(
+                        color: const Color.fromRGBO(255, 255, 255, 1),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: Row(
+                        children: [
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Container(
+                            height: 90,
+                            width: 90,
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(20),
+                                image: DecorationImage(
+                                    image: AssetImage(
+                                        Provider.of<HomeInfo>(context)
+                                            .NearByLoc[index]['image']),
+                                    fit: BoxFit.cover)),
+                          ),
+                          const SizedBox(
+                            width: 10,
+                          ),
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              const SizedBox(
+                                height: 10,
                               ),
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.location_on,
-                                  size: 16,
-                                  color: Color.fromRGBO(90, 90, 90, 1),
+                              Text(
+                                Provider.of<HomeInfo>(context).NearByLoc[index]
+                                    ['name'],
+                                style: GoogleFonts.poppins(
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: const Color.fromRGBO(0, 0, 0, 1),
                                 ),
-                                Text(
-                                  infoRoom[index]['location'],
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color.fromRGBO(90, 90, 90, 1),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            const SizedBox(
-                              height: 6,
-                            ),
-                            Row(
-                              children: [
-                                const Icon(
-                                  Icons.bed,
-                                  size: 15,
-                                  color: Color.fromRGBO(90, 90, 90, 1),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  infoRoom[index]['bed'],
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color.fromRGBO(90, 90, 90, 1),
-                                  ),
-                                ),
-                                const SizedBox(
-                                  width: 10,
-                                ),
-                                const Icon(
-                                  Icons.bathtub_sharp,
-                                  size: 15,
-                                  color: Color.fromRGBO(90, 90, 90, 1),
-                                ),
-                                const SizedBox(
-                                  width: 5,
-                                ),
-                                Text(
-                                  infoRoom[index]['bath'],
-                                  style: GoogleFonts.poppins(
-                                    fontSize: 11,
-                                    fontWeight: FontWeight.w600,
-                                    color: const Color.fromRGBO(90, 90, 90, 1),
-                                  ),
-                                ),
-                              ],
-                            ),
-                            SizedBox(
-                              width: 280,
-                              height: 20,
-                              child: Row(
+                              ),
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Row(
                                 children: [
-                                  const Spacer(),
-                                  // SizedBox(width: 300,),
-                                  Text(
-                                    "\$${infoRoom[index]['price'].substring(0, 4)}",
-                                    style: GoogleFonts.poppins(
-                                      fontSize: 15,
-                                      fontWeight: FontWeight.w600,
-                                      color:
-                                          const Color.fromRGBO(32, 169, 247, 1),
-                                    ),
+                                  const Icon(
+                                    Icons.location_on,
+                                    size: 16,
+                                    color: Color.fromRGBO(90, 90, 90, 1),
                                   ),
                                   Text(
-                                    "${infoRoom[index]['price'].substring(4, 11)}",
+                                    Provider.of<HomeInfo>(context)
+                                        .NearByLoc[index]['location'],
                                     style: GoogleFonts.poppins(
-                                      fontSize: 15,
+                                      fontSize: 11,
                                       fontWeight: FontWeight.w600,
                                       color:
                                           const Color.fromRGBO(90, 90, 90, 1),
@@ -435,10 +357,84 @@ class _Screen2State extends State<Screen2> {
                                   ),
                                 ],
                               ),
-                            )
-                          ],
-                        )
-                      ],
+                              const SizedBox(
+                                height: 6,
+                              ),
+                              Row(
+                                children: [
+                                  const Icon(
+                                    Icons.bed,
+                                    size: 15,
+                                    color: Color.fromRGBO(90, 90, 90, 1),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    Provider.of<HomeInfo>(context)
+                                        .NearByLoc[index]['bed'],
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromRGBO(90, 90, 90, 1),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 10,
+                                  ),
+                                  const Icon(
+                                    Icons.bathtub_sharp,
+                                    size: 15,
+                                    color: Color.fromRGBO(90, 90, 90, 1),
+                                  ),
+                                  const SizedBox(
+                                    width: 5,
+                                  ),
+                                  Text(
+                                    Provider.of<HomeInfo>(context)
+                                        .NearByLoc[index]['bath'],
+                                    style: GoogleFonts.poppins(
+                                      fontSize: 11,
+                                      fontWeight: FontWeight.w600,
+                                      color:
+                                          const Color.fromRGBO(90, 90, 90, 1),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                              SizedBox(
+                                width: 280,
+                                height: 20,
+                                child: Row(
+                                  children: [
+                                    const Spacer(),
+                                    // SizedBox(width: 300,),
+                                    Text(
+                                      "\$${Provider.of<HomeInfo>(context).NearByLoc[index]['price'].substring(0, 4)}",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color: const Color.fromRGBO(
+                                            32, 169, 247, 1),
+                                      ),
+                                    ),
+                                    Text(
+                                      "${Provider.of<HomeInfo>(context).NearByLoc[index]['price'].substring(4, 11)}",
+                                      style: GoogleFonts.poppins(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.w600,
+                                        color:
+                                            const Color.fromRGBO(90, 90, 90, 1),
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
                     ),
                   );
                 },

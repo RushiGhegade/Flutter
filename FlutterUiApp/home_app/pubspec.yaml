@@ -10,7 +10,11 @@ dependencies:
   flutter:
     sdk: flutter
   google_fonts: ^6.2.1
+  lottie: ^3.1.2
+  page_transition: ^2.1.0
   provider: ^6.1.2
+  swipeable_button_flutter: ^0.0.3
+  swipeable_button_view: ^0.0.2
 
 dev_dependencies:
   flutter_test:
@@ -20,8 +24,13 @@ dev_dependencies:
 flutter:
   uses-material-design: true
   assets:
+    - lib/images/done1.json
     - lib/images/s1.jpg
     - lib/images/s2_a.png
     - lib/images/s2_1.jpg
     - lib/images/s2_2.jpg
     - lib/images/s2_3.jpg
+    - lib/images/h1.jpg
+    - lib/images/h2.jpg
+    - lib/images/h3.jpg
+    - lib/images/h4.jpg

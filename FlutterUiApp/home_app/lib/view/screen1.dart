@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:home_app/view/screen2.dart';
+import 'package:page_transition/page_transition.dart';
 
 class Screen1 extends StatefulWidget {
   const Screen1({super.key});
@@ -16,10 +17,18 @@ class _Screen1State extends State<Screen1> {
       body: Column(
         children: [
           Container(
+            decoration: const BoxDecoration(
+                borderRadius: BorderRadius.only(
+                    // bottomLeft: Radius.circular(5),
+                    // bottomRight: Radius.circular(5),
+                    ),
+                image: DecorationImage(
+                  image: AssetImage("lib/images/s1.jpg"),
+                  fit: BoxFit.cover,
+                )),
             height: 631,
             // width: 390,
-            child: const Image(
-                image: AssetImage("lib/images/s1.jpg"), fit: BoxFit.cover),
+            // child: const Image(image: AssetImage(), fit: BoxFit.cover),
           ),
           Center(
             child: Column(
@@ -32,7 +41,7 @@ class _Screen1State extends State<Screen1> {
                   style: GoogleFonts.poppins(
                     fontSize: 22,
                     fontWeight: FontWeight.w600,
-                    color: Color.fromRGBO(0, 0, 0, 1),
+                    color: const Color.fromRGBO(0, 0, 0, 1),
                   ),
                 ),
                 const SizedBox(
@@ -55,12 +64,17 @@ class _Screen1State extends State<Screen1> {
                 ),
                 GestureDetector(
                   onTap: () {
-                    Navigator.of(context).push(MaterialPageRoute(
+                    Navigator.of(context).push(PageTransition(
+                        child: const Screen2(),
+                        type: PageTransitionType.leftToRight));
+                  },
+                  /*
+                  MaterialPageRoute(
                       builder: (context) {
                         return const Screen2();
                       },
-                    ));
-                  },
+                    )
+                  */
                   child: Container(
                       alignment: Alignment.center,
                       height: 55,
