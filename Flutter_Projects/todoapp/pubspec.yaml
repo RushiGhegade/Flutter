@@ -1,0 +1,32 @@
+name: todoapp
+description: A new Flutter project.
+publish_to: "none"
+version: 0.1.0
+
+environment:
+  sdk: ">=3.0.6 <4.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  google_fonts: ^6.1.0
+  sqflite: ^2.3.2
+  path: ^1.9.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^2.0.0
+  intl: ^0.19.0
+
+flutter:
+  uses-material-design: true
+  assets:
+    - lib/Image/todo.png
+    - lib/Image/todo1.jpg
+    - lib/Image/tree.png
+    - lib/Image/tree2.png
+    - lib/loginpageimg/login.png
+    - lib/loginpageimg/l1.png
+    - lib/loginpageimg/bg1.webp
+    - lib/loginpageimg/lock1.jpg
