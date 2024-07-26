@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "841405646363",
+    "project_id": "dummy-7ac0e",
+    "storage_bucket": "dummy-7ac0e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:841405646363:android:8dac2d17555b31050f5abe",
+        "android_client_info": {
+          "package_name": "com.example.dealsdray"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDvS1jCzqN6A7rxT6ofbK2_EQQDTa_OoOQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
