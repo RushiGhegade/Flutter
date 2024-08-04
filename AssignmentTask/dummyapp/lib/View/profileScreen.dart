@@ -8,7 +8,6 @@ import 'package:dummyapp/Model/users.dart';
 import 'package:dummyapp/View/HomeScreen.dart';
 import 'package:dummyapp/apis/apis.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 import 'package:image_picker/image_picker.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -373,9 +372,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
       await Apis.firebaseauth.signOut().then((value) {
         log("Sign out Successfully with Email");
       });
-      await GoogleSignIn().signOut().then((value) {
-        log("Sign out Successfully with google");
-      });
+
       SnackBars(context, "Account Logout Successfully").showSnackBars();
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {

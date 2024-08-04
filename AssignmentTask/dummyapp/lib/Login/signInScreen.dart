@@ -21,7 +21,7 @@ class _SignInScreenState extends State {
 
   final _emailController = TextEditingController();
   final _passController = TextEditingController();
-  final _confirmPassController = TextEditingController();
+
   final flag = false;
 
   void _signUpValidate() async {
@@ -78,7 +78,7 @@ class _SignInScreenState extends State {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 30),
+        padding: const EdgeInsets.symmetric(vertical: 35, horizontal: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
@@ -125,15 +125,7 @@ class _SignInScreenState extends State {
             const SizedBox(
               height: 10,
             ),
-            TextFormField(
-              controller: _confirmPassController,
-              decoration: const InputDecoration(
-                hintText: "Confirm Password",
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
+
             ElevatedButton(
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.red,

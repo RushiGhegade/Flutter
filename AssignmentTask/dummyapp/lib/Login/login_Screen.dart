@@ -162,150 +162,155 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Padding(
-        padding: const EdgeInsets.only(left: 20, right: 20),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(
-              height: 15,
-            ),
-            Center(
-              child: SizedBox(
-                height: 250,
-                width: 250,
-                child: Image.asset(
-                  fit: BoxFit.cover,
-                  // scale: 8,
-                  opacity: const AlwaysStoppedAnimation(0.7),
-                  "lib/images/p5.png",
+      body: SingleChildScrollView(
+        child: SizedBox(
+          height: MediaQuery.of(context).size.height,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20, right: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const SizedBox(
+                  height: 15,
                 ),
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            Center(
-              child: ToggleSwitch(
-                minHeight: 45,
-                minWidth: 100.0,
-                cornerRadius: 15.0,
-                activeBgColors: [
-                  [Colors.red[800]!],
-                  [Colors.red[800]!]
-                ],
-                activeFgColor: Colors.white,
-                inactiveBgColor: Colors.grey,
-                inactiveFgColor: Colors.white,
-                initialLabelIndex: index,
-                totalSwitches: 2,
-                labels: ['Phone', 'Email'],
-                radiusStyle: true,
-                onToggle: (index) {
-                  this.index = index!;
-                  setState(() {});
-                  print('switched to: $index');
-                },
-              ),
-            ),
-            const SizedBox(
-              height: 20,
-            ),
-            const Text(
-              "Glad to see you!",
-              style: TextStyle(
-                fontSize: 31,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-            const SizedBox(
-              height: 13,
-            ),
-            Text(
-              "Please Provide Your ${(index == 0) ? "Phone Number" : "Email"}",
-              style: const TextStyle(
-                fontSize: 19,
-                fontWeight: FontWeight.w400,
-              ),
-            ),
-            // const SizedBox(
-            //   height: 70,
-            // ),
-            const Spacer(
-              flex: 1,
-            ),
-
-            enterLoginInfo(),
-            // const SizedBox(
-            //   height: 1,
-            // ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                TextButton(
-                  onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(
-                      builder: (context) {
-                        return const ForgetPassScreen();
-                      },
-                    ));
-                  },
-                  child: const Text("Forget Password"),
-                )
-              ],
-            ),
-            const Spacer(
-              flex: 1,
-            ),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.red,
-                fixedSize: Size(MediaQuery.of(context).size.width, 50),
-              ),
-              onPressed: () {
-                loginValidate();
-                setState(() {});
-              },
-              child: (!flag2)
-                  ? const Text(
-                      "Login",
-                      style: TextStyle(
-                        fontSize: 19,
-                        fontWeight: FontWeight.w400,
-                        color: Colors.white,
-                      ),
-                    )
-                  : const CircularProgressIndicator(
-                      // value: 1,
-                      color: Colors.white,
+                Center(
+                  child: SizedBox(
+                    height: 250,
+                    width: 250,
+                    child: Image.asset(
+                      fit: BoxFit.cover,
+                      // scale: 8,
+                      opacity: const AlwaysStoppedAnimation(0.7),
+                      "lib/images/p5.png",
                     ),
-            ),
-            const Spacer(
-              flex: 2,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                const Text("Dont Have An Account"),
-                TextButton(
-                    onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(
-                        builder: (context) {
-                          return const SignInScreen();
-                        },
-                      ));
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                Center(
+                  child: ToggleSwitch(
+                    minHeight: 45,
+                    minWidth: 100.0,
+                    cornerRadius: 15.0,
+                    activeBgColors: [
+                      [Colors.red[800]!],
+                      [Colors.red[800]!]
+                    ],
+                    activeFgColor: Colors.white,
+                    inactiveBgColor: Colors.grey,
+                    inactiveFgColor: Colors.white,
+                    initialLabelIndex: index,
+                    totalSwitches: 2,
+                    labels: ['Phone', 'Email'],
+                    radiusStyle: true,
+                    onToggle: (index) {
+                      this.index = index!;
+                      setState(() {});
+                      print('switched to: $index');
                     },
-                    child: const Text("Sign Up"))
+                  ),
+                ),
+                const SizedBox(
+                  height: 20,
+                ),
+                const Text(
+                  "Glad to see you!",
+                  style: TextStyle(
+                    fontSize: 31,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
+                const SizedBox(
+                  height: 13,
+                ),
+                Text(
+                  "Please Provide Your ${(index == 0) ? "Phone Number" : "Email"}",
+                  style: const TextStyle(
+                    fontSize: 19,
+                    fontWeight: FontWeight.w400,
+                  ),
+                ),
+                // const SizedBox(
+                //   height: 70,
+                // ),
+                const Spacer(
+                  flex: 1,
+                ),
+
+                enterLoginInfo(),
+                // const SizedBox(
+                //   height: 1,
+                // ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.end,
+                  children: [
+                    TextButton(
+                      onPressed: () {
+                        Navigator.push(context, MaterialPageRoute(
+                          builder: (context) {
+                            return const ForgetPassScreen();
+                          },
+                        ));
+                      },
+                      child: const Text("Forget Password"),
+                    )
+                  ],
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+                ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.red,
+                    fixedSize: Size(MediaQuery.of(context).size.width, 50),
+                  ),
+                  onPressed: () {
+                    loginValidate();
+                    setState(() {});
+                  },
+                  child: (!flag2)
+                      ? const Text(
+                          "Login",
+                          style: TextStyle(
+                            fontSize: 19,
+                            fontWeight: FontWeight.w400,
+                            color: Colors.white,
+                          ),
+                        )
+                      : const CircularProgressIndicator(
+                          // value: 1,
+                          color: Colors.white,
+                        ),
+                ),
+                const Spacer(
+                  flex: 2,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    const Text("Dont Have An Account"),
+                    TextButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(
+                            builder: (context) {
+                              return const SignInScreen();
+                            },
+                          ));
+                        },
+                        child: const Text("Sign Up"))
+                  ],
+                ),
+                const Spacer(
+                  flex: 1,
+                ),
+
+                const Spacer(
+                  flex: 1,
+                ),
               ],
             ),
-            const Spacer(
-              flex: 1,
-            ),
-
-            const Spacer(
-              flex: 1,
-            ),
-          ],
+          ),
         ),
       ),
     );

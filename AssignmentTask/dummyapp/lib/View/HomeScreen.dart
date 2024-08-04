@@ -8,7 +8,6 @@ import 'package:dummyapp/View/chatScreen.dart';
 import 'package:dummyapp/View/profileScreen.dart';
 import 'package:dummyapp/apis/apis.dart';
 import 'package:flutter/material.dart';
-import 'package:google_sign_in/google_sign_in.dart';
 
 // import 'login_Screen.dart';
 
@@ -31,9 +30,7 @@ class _HomeScreenState extends State<HomeScreen> {
       await Apis.firebaseauth.signOut().then((value) {
         log("Sign out Successfully with Email");
       });
-      await GoogleSignIn().signOut().then((value) {
-        log("Sign out Successfully with google");
-      });
+
       SnackBars(context, "Account Logout Successfully").showSnackBars();
       Navigator.push(context, MaterialPageRoute(
         builder: (context) {
