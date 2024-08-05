@@ -7,6 +7,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dummyapp/Model/message.dart';
 import 'package:dummyapp/Model/users.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:intl/intl.dart';
 
@@ -22,6 +23,29 @@ class Apis {
   // it is for current userInfo
   static late Users me;
 
+  // get the firebaseMessaging Request
+  static FirebaseMessaging messaging = FirebaseMessaging.instance;
+
+  // it give the firebase messaging Token it can give the permission from user
+  static Future<void> getFirebaseMsgToken() async {
+    NotificationSettings settings = await messaging.requestPermission();
+    log('User granted permission: ${settings.authorizationStatus}');
+
+    messaging.getToken().then((t) {
+      if (t != null) {
+        me.pushToken = t;
+        log("Push Token : $t");
+      }
+    });
+  }
+
+  // update the Value in firebase Notification
+  static Future<void> update() async {
+    fireStore.collection("Users").doc(firebaseauth.currentUser!.uid).update({
+      "push_token": me.pushToken,
+    });
+  }
+
   static Future<void> getSelfInfo() async {
     await fireStore
         .collection("Users")
@@ -30,6 +54,9 @@ class Apis {
         .then((value) async {
       if (value.exists) {
         me = Users.fromJson(value.data()!);
+        await getFirebaseMsgToken();
+        await updateValues();
+        log("Call Done Update");
       } else {
         await createUser().then((value) {
           return getSelfInfo();
@@ -49,6 +76,7 @@ class Apis {
         .update({
       "name": me.name,
       "about": me.about,
+      "push_token": me.pushToken,
     });
   }
 

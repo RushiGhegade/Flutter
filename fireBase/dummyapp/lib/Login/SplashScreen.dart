@@ -15,7 +15,7 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   @override
   void initState() {
-    Future<void>.delayed(const Duration(seconds: 8), () {
+    Future<void>.delayed(const Duration(seconds: 5), () {
       if (Apis.firebaseauth.currentUser != null) {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
