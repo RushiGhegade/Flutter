@@ -1,0 +1,30 @@
+{
+  "project_info": {
+    "project_number": "550478642155",
+    "firebase_url": "https://geometric-vim-422815-b5-default-rtdb.firebaseio.com",
+    "project_id": "geometric-vim-422815-b5",
+    "storage_bucket": "geometric-vim-422815-b5.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:550478642155:android:90d67a9fd146845b31b7ae",
+        "android_client_info": {
+          "package_name": "com.example.courceapp"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPNQXyds844MifnWn3u5SFK9L2vqw_QAA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

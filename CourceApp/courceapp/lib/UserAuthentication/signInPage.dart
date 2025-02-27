@@ -1,10 +1,9 @@
 import 'dart:developer';
 
+import 'package:courceapp/UserAuthentication/loginpage.dart';
+import 'package:courceapp/firebaseOperations/firebaseoperation.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
-import 'package:newsapp/Authentication/local_store.dart';
-
-import 'loginpage.dart';
 
 class SignInPage extends StatefulWidget {
   const SignInPage({super.key});
@@ -18,49 +17,36 @@ class _SignInPageState extends State<SignInPage> {
   TextEditingController pass = TextEditingController();
   TextEditingController email = TextEditingController();
   TextEditingController moNo = TextEditingController();
-  TextEditingController dateController = TextEditingController();
 
   GlobalKey<FormFieldState> usernamekeys = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> passkeys = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> emailkey = GlobalKey<FormFieldState>();
   GlobalKey<FormFieldState> moNoKey = GlobalKey<FormFieldState>();
-  GlobalKey<FormFieldState> dateKey = GlobalKey<FormFieldState>();
 
   var flagv = true;
 
-  void createAccount(String email, String pass) async {
-    log("Message");
-    bool login = await LocalStoreDB.storeData(email, pass);
+  void createAccount(String email, String password) async {
+    try {
+      log("-----------  $email $password");
+      await FirebaseOperation.signInWithEmail(email, password).then((value) {
+        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+            backgroundColor: Colors.green, content: Text("Login Sucessfully")));
+      });
+    } on FirebaseAuthException catch (e) {
+      log("$e");
+      if (e.code == 'user-not-found') {
+        log("No user found for that email.");
+      } else if (e.code == 'wrong-password') {
+        log("Wrong password provided for that user.");
+      } else {
+        log("Error: ${e.message}");
+      }
 
-    if (login) {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.green,
-          content: Text("Sign Up Sucessfully")));
-      Navigator.pushReplacement(context, MaterialPageRoute(
-        builder: (context) {
-          return LoginPage();
-        },
-      ));
-    } else {
-      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-          behavior: SnackBarBehavior.floating,
-          backgroundColor: Colors.red,
-          content: Text("Please Try Again")));
+      ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(backgroundColor: Colors.red, content: Text("$e")));
+      return null;
     }
   }
-
-  Future<DateTime> myshowDatePicker() async {
-    DateTime? dateTime = await showDatePicker(
-      context: context,
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
-    );
-
-    return dateTime!;
-  }
-
-  int? age;
 
   @override
   Widget build(BuildContext context) {
@@ -123,45 +109,6 @@ class _SignInPageState extends State<SignInPage> {
               SizedBox(
                 height: 20,
               ),
-
-              TextFormField(
-                controller: dateController,
-                key: dateKey,
-                onTap: () async {
-                  dateController.clear();
-                  DateTime dateTime = await myshowDatePicker();
-
-                  int selecteddate = dateTime.year;
-
-                  int currentYear = DateTime.now().year;
-
-                  log("${selecteddate}");
-
-                  age = currentYear - selecteddate;
-
-                  if (age! > 16) {
-                    dateController.text =
-                        DateFormat('yyyy-MM-dd').format(dateTime);
-                  }
-
-                  // log("$age");
-                },
-                validator: (value) {
-                  if (age! < 16) {
-                    return "You are not allowed";
-                  } else {
-                    return null;
-                  }
-                },
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderRadius: BorderRadius.circular(15),
-                    ),
-                    hintText: "Select the data"),
-              ),
-
-              SizedBox(height: 10),
-
               TextFormField(
                 // maxLines: 1,
                 key: emailkey,
@@ -260,10 +207,8 @@ class _SignInPageState extends State<SignInPage> {
                     createAccount(email.text.toString().trim(),
                         pass.text.toString().trim());
                   } else {
-                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                        behavior: SnackBarBehavior.floating,
-                        backgroundColor: Colors.red,
-                        content: Text("Please fill All Field")));
+                    ScaffoldMessenger.of(context).showSnackBar(
+                        SnackBar(content: Text("Please Enter All Field")));
                   }
                 },
                 child: Text(
