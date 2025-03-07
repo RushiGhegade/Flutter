@@ -122,6 +122,7 @@ class _VedioStartState extends State<VedioStart> {
         // Ensure the first frame is shown after the video is initialized, even before the play button has been pressed.
         setState(() {
           _controller.play();
+          
           log(widget.image);
           _startTimer();
           log("vedio intialize sucessfully");

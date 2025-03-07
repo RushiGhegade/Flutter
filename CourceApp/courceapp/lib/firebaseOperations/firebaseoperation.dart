@@ -30,8 +30,7 @@ class FirebaseOperation {
         'Frontend Cources',
         'Language Cources'
       ];
-      // log("Start call-2");
-      // log("${data.value}");
+      
       for (int j = 0; j < cource.length; j++) {
         for (int i = 0; i < dataval[cource[j]].length; i++) {
           list.add(CourceDataModel(

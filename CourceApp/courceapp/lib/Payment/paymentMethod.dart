@@ -54,11 +54,6 @@ class _PaymentmethodState extends State<Paymentmethod> {
         msg: "Payment Succesful!" + response.paymentId!,
         toastLength: Toast.LENGTH_SHORT);
     addCource(widget.name!, widget.val!);
-    // Navigator.push(context, MaterialPageRoute(
-    //   builder: (context) {
-    //     return HomeScreen();
-    //   },
-    // ));
   }
 
   void handlePaymentError(PaymentFailureResponse response) {

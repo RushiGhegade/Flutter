@@ -95,12 +95,14 @@ class _MessageScreenState extends State<MessageScreen> {
             padding:
                 const EdgeInsets.only(left: 10, right: 17, top: 10, bottom: 10),
             decoration: BoxDecoration(
-                color: Colors.blue.shade300,
-                border: Border.all(color: Colors.black38),
-                borderRadius: const BorderRadius.only(
-                    topRight: Radius.circular(10),
-                    bottomLeft: Radius.circular(10),
-                    bottomRight: Radius.circular(10))),
+              color: Colors.blue.shade300,
+              border: Border.all(color: Colors.black38),
+              borderRadius: const BorderRadius.only(
+                topRight: Radius.circular(10),
+                bottomLeft: Radius.circular(10),
+                bottomRight: Radius.circular(10),
+              ),
+            ),
             child: Column(
               children: [
                 Text(
@@ -114,7 +116,6 @@ class _MessageScreenState extends State<MessageScreen> {
             ),
           ),
         ),
-        // Spacer(),
       ],
     );
   }
